@@ -8,6 +8,7 @@ yarn-error.log
 AI-services/venv/
 AI-services/*.pyc
 AI-services/__pycache__/
+**/config.json
 
 # React
 **/.cache/
