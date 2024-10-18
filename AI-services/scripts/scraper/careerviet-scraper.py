@@ -36,13 +36,11 @@ def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_list
                 
                 job_link = job.find('a', class_='job_link')['href'] if job.find('a', class_='job_link') else None
                 
-                # Cào mô tả công việc từ link chi tiết
                 if job_link:
                     detail_response = requests.get(job_link, headers=headers)
                     if detail_response.status_code == 200:
                         detail_soup = BeautifulSoup(detail_response.content, 'html.parser')
                         
-                        # Tìm các thẻ detail-row để lấy mô tả
                         detail_rows = detail_soup.find_all('div', class_='detail-row')
                         filtered_rows = []
 
@@ -58,7 +56,6 @@ def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_list
                             for item in items:
                                 project_description.append(item.text.strip())
 
-                        # Chuyển danh sách mô tả thành chuỗi
                         project_description = '; '.join(project_description) if project_description else 'Không có mô tả'
 
                     else:
@@ -67,13 +64,10 @@ def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_list
                 else:
                     project_description = 'Không có link chi tiết'
 
-                # Lưu trữ thông tin công việc
                 jobs.append([title, company, salary, location, expireDate, job_link, project_description])
 
-    # Đảm bảo thư mục 'data' tồn tại
     os.makedirs(os.path.dirname(output_filename), exist_ok=True)
 
-    # Lưu các công việc vào file CSV
     with open(output_filename, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['Title', 'Company', 'Salary', 'Location', 'ExpireDate', 'Link', 'ProjectDescription'])
@@ -81,7 +75,6 @@ def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_list
 
     print("Dữ liệu công việc đã được lưu thành công vào file CSV.")
 
-# Ví dụ sử dụng module
 base_urls = [
     'https://careerviet.vn/viec-lam/cntt-phan-mem-c1-vi.html?page={}',
 ]
