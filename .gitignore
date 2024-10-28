@@ -9,6 +9,8 @@ AI-services/venv/
 AI-services/*.pyc
 AI-services/__pycache__/
 **/config.json
+**/config.cfg
+AI-services/models/cv-parser
 
 # React
 **/.cache/
