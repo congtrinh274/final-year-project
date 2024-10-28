@@ -10,7 +10,8 @@ AI-services/*.pyc
 AI-services/__pycache__/
 **/config.json
 **/config.cfg
-AI-services/models/cv-parser
+AI-services/models/cv-parser/model-best
+AI-services/models/cv-parser/model-last
 
 # React
 **/.cache/
