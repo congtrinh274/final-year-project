@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup # type: ignore
 import csv
 import os
 
-def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_listings.csv'):
+def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='../../train_data/job-recommender/job_listings.csv'):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
@@ -68,7 +68,7 @@ def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='data/job_list
 
     os.makedirs(os.path.dirname(output_filename), exist_ok=True)
 
-    with open(output_filename, mode='w', newline='', encoding='utf-8') as file:
+    with open(output_filename, mode='a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['Title', 'Company', 'Salary', 'Location', 'ExpireDate', 'Link', 'ProjectDescription'])
         writer.writerows(jobs)

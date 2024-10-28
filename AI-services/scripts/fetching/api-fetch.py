@@ -2,7 +2,7 @@ import requests # type: ignore
 import csv
 import json
 
-def fetch_job_data(api_config, csv_file='data/job_listings.csv'):
+def fetch_job_data(api_config, csv_file='../../train_data/job-recommender/job_listings.csv'):
     with open(csv_file, "a", newline='', encoding="utf-8") as file:
         writer = csv.writer(file)
         
@@ -36,7 +36,7 @@ def fetch_job_data(api_config, csv_file='data/job_listings.csv'):
                 print(f"Failed to retrieve data from {config['name']}: {response.status_code}")
 
 if __name__ == "__main__":
-    with open('config.json') as config_file:
+    with open('D:\Workspace\job-cv-ai\AI-services\config.json') as config_file:
         config = json.load(config_file)
 
     api_config = [
