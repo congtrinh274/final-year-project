@@ -2,7 +2,7 @@ import requests # type: ignore
 import csv
 import json
 
-def fetch_job_data(api_config, csv_file='../../train_data/job-recommender/job_listings.csv'):
+def fetch_job_data(api_config, csv_file='D:\Workspace\job-cv-ai\AI-services\data\jobs\job_listings.csv'):
     with open(csv_file, "a", newline='', encoding="utf-8") as file:
         writer = csv.writer(file)
         

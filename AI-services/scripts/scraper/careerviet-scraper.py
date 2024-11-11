@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup # type: ignore
 import csv
 import os
 
-def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='../../train_data/job-recommender/job_listings.csv'):
+def scrape_jobs(base_urls, num_pages_to_scrape=2, output_filename='D:\Workspace\job-cv-ai\AI-services\data\jobs\job_listings.csv'):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }

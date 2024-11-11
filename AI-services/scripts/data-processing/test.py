@@ -1,21 +1,32 @@
-import pandas as pd
-from googletrans import Translator
+import json
 
-# Đọc file CSV
-df = pd.read_csv("D:\Workspace\job-cv-ai\AI-services\data\job_listings.csv", delimiter='\t')
-print(df.head())
-# Khởi tạo bộ dịch tự động (Google Translator)
-translator = Translator()
+# Load the input JSON file
+with open("train_data2.json", "r", encoding="utf-8") as file:
+    data = json.load(file)
 
-# Dịch các mô tả công việc sang tiếng Anh nếu cần
-def translate_job_description(description):
-    try:
-        translated = translator.translate(description, src='vi', dest='en')
-        return translated.text
-    except Exception as e:
-        print(f"Translation failed: {e}")
-        return description
+# Initialize list to store the converted entries
+converted_entries = []
 
-# Dịch các mô tả công việc tiếng Việt sang tiếng Anh
-df['Job_Description_Translated'] = df['ProjectDescription'].apply(translate_job_description)
+for item in data:
+    # Extract the "content" and "annotation" fields from each item
+    content = item["content"]
+    annotations = item["annotation"]
 
+    # Convert annotations to entities format
+    entities = []
+    for annotation in annotations:
+        if annotation["label"]:  # Check if label list is not empty
+            label = annotation["label"][0]  # Assuming only one label per annotation
+            for point in annotation["points"]:
+                start = point["start"]
+                end = point["end"]
+                entities.append([start, end, label])
+
+    # Append the transformed entry to the list
+    converted_entries.append([content, {"entities": entities}])
+
+# Save the converted entries to a JSON file
+with open("output.json", "w", encoding="utf-8") as file:
+    json.dump(converted_entries, file, ensure_ascii=False,)
+
+print("Data conversion complete. The output is saved in 'output.json'.")
